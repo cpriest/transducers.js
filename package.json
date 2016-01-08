@@ -2,7 +2,8 @@
   "name": "transducers.js",
   "version": "0.3.2",
   "author": "James Long <longster@gmail.com>",
-  "main": "./transducers.js",
+  "main": "transducers.es5.js",
+  "jsnext:main": "./transducers.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/jlongster/transducers.js.git"
@@ -13,7 +14,18 @@
     "functional",
     "util"
   ],
+  "scripts": {
+    "test": "mocha --compilers js:babel-register tests",
+    "prepublish": "babel -o transducers.es5.js transducers.js",
+    "build": "npm run build:dev && npm run build:prod",
+    "build:dev": "webpack",
+    "build:prod": "NODE_ENV=production webpack"
+  },
   "devDependencies": {
+    "babel-core": "^6.4.0",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-register": "^6.3.13",
     "benchmark": "^1.0.0",
     "es6-macros": "0.0.7",
     "expect.js": "^0.3.1",
@@ -21,12 +33,12 @@
     "gulp-header": "^1.1.1",
     "gulp-sourcemaps": "^1.1.5",
     "gulp-sweetjs": "^0.5.4",
+    "immutable": "^3.7.1",
     "lodash": "lodash/lodash",
     "mocha": "^1.21.4",
     "source-map-support": "^0.2.7",
     "sweet.js": "^0.7.1",
     "underscore": "^1.7.0",
-    "webpack": "^1.4.0-beta9",
-    "immutable": "^3.7.1"
+    "webpack": "^1.4.0-beta9"
   }
 }
