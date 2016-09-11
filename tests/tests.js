@@ -1,11 +1,11 @@
 var expect = require('expect.js');
 var Immutable = require('immutable');
-var t = require('../transducers');
-var { reduce, transformer, toArray, toObj, toIter, iterate, push, merge, empty,
-      transduce, seq, into, compose, map, filter, remove,
-      cat, mapcat, keep, dedupe, take, takeWhile,
-      drop, dropWhile, partition, partitionBy,
-      interpose, repeat, takeNth } = t;
+import { reduce, transformer, toArray, toObj, toIter, push, merge,
+  transduce, seq, into, compose, map, filter, remove,
+  cat, mapcat, keep, dedupe, take, takeWhile,
+  drop, dropWhile, partition, partitionBy,
+  interpose, repeat, takeNth, LazyTransformer } from '../transducers';
+
 
 var context = { num: 5 };
 
@@ -425,7 +425,7 @@ describe('', () => {
     };
 
     var lt = toIter(nums, map(x => x * 2));
-    expect(lt instanceof t.LazyTransformer).to.be.ok();
+    expect(lt instanceof LazyTransformer).to.be.ok();
     expect(toArray(lt, take(5)),
            [0, 2, 4, 6, 8]);
   });
